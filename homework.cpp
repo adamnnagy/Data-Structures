@@ -6,8 +6,8 @@ Set::Set(const Set &obj) {
    std::cout << "Copy constructor is called." << '\n';
    maxCardinality = obj.maxCardinality;
    size = obj.size;
-   set = obj.set;
-   for (size_t i = 0; i < obj.size; i++) {
+   set = new int[maxCardinality];
+   for (size_t i = 0; i < size; i++) {
      set[i] = obj.set[i];
      std::cout << obj.set[i] << ", " << set[i] << '\n';
    }
@@ -190,7 +190,7 @@ int main() {
   asdf.Print();
   fdsa.Print();
 
-  // std::cout << "asdf: " << asdf << '\n';
+  std::cout << "asdf: " << asdf << '\n';
   //test copy constructor
   Set foo = asdf;
   foo.Print();
