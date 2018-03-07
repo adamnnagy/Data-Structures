@@ -1,3 +1,5 @@
+#include <iostream>
+
 class Set {
 private:
   int maxCardinality;
@@ -14,49 +16,53 @@ public:
   Set(const Set &obj);
 
   //Assignment Operator
-  Set& operator=(Set other) {
-      Copy(other);
+  Set& operator=(Set &obj) {
+      Copy(obj);
   }
     // verify if a given integer is a member of the set
-  Set& operator&(int other){
-      Member(other);
+  Set& operator&(int &obj){
+      Member(obj);
   }
     // verify the equality of two sets
-  Set& operator==(Set other){
-      Equal(other);
+  Set& operator==(Set &obj){
+      Equal(obj);
   }
     // verify the inequality of two sets
-  Set& operator!=(Set other){
-      !Equal(other);
+  Set& operator!=(Set &obj){
+      !Equal(obj);
   }
     // compute the intersection of two sets
-  Set& operator*(Set other){
-      Intersect(other);
+  Set& operator*(Set &obj){
+      Intersect(obj);
   }
     // compute the union of two sets
-  Set& operator+(Set other){
-      Union(other);
+  Set& operator+(Set &obj){
+      Union(obj);
   }
   //these would be easy if i had the intersection and union figured out
     // compute the difference of two sets
-  Set& operator-(Set other){
+  Set& operator-(Set &obj){
 
   }
     // verify the inclusion of one set inside another
-  Set& operator<=(Set other) {
-
+  Set& operator<=(Set &obj) {
+    // return Intersect(other).Equal();
   }
     // display the content of a set
-  Set& operator<<(int other){
-      Print();
+  friend std::ostream& operator<< (std::ostream& os, Set &a){
+      a.Print();
   }
     // input the content of a set
-  Set& operator>>(int other){
-      this->AddElem(other);
+  friend std::istream& operator>> (std::istream& input, Set &a){
+    int e;
+    input >> e;
+    a.AddElem(e);
+    // return is;
   }
 
-  Set(){maxCardinality = 200; set = new int[maxCardinality];}; //default constructor
-  Set(int *arr){maxCardinality = 200; set = new int[maxCardinality]; set = arr;}; //default constructor
+  //constructors
+  Set(){maxCardinality = 200; set = new int[maxCardinality]; size = 0;}; //default constructor
+  Set(int *arr){maxCardinality = 200; set = new int[maxCardinality]; *set = *arr;}; //default constructor
   Set(const int num) {maxCardinality = num; set = new int[maxCardinality];}; //One constructor with one argument: the maximal cardinality of the set
 
   //setters
@@ -74,5 +80,5 @@ public:
   void Print(); //display the set, use the mathematics notation
 
   //destructor
-  virtual ~Set () { delete [] set;};
+  virtual ~Set () {delete [] set;};
 };
