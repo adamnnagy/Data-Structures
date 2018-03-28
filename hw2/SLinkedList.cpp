@@ -2,8 +2,7 @@
 #include <iostream>
 #include "SLinkedList.h"
 
-SLinkedList::SLinkedList() // constructor
- {head = NULL;} //what is this?
+SLinkedList::SLinkedList() : head(NULL) { } //what is this?
 
 SLinkedList::~ SLinkedList() // destructor
 {while (!empty()) removeFront();}
@@ -12,17 +11,15 @@ SLinkedList::~ SLinkedList() // destructor
 bool SLinkedList::empty() const // is list empty ?
 {return head == NULL;}
 
-const std::string& SLinkedList::front() const // get front element
-{try {
-  if (empty()) {
-  throw "the list is empty";
-}
-}
-catch (const char* msg) {
-  std::cout << msg << '\n';
-  return 0;
-}
-  return head -> elem;
+std::string& SLinkedList::front() const { // get front element
+  try { if (empty()) throw "The list is empty"; //empty list
+   return head -> elem;
+ }
+ catch (const char* str) {
+   std::cout << "The list is empty" << '\n';
+   // std::string foo = "foo";
+   // return foo;
+ }
 }
 
 void SLinkedList::addFront(const std::string& e) { // add to front of list
@@ -40,4 +37,19 @@ void SLinkedList::removeFront() { // remove the item from front
       head = old -> next; // the head will be the next of the old
       delete old; // old head gets deleted
   }
+}
+
+int main() {
+  SLinkedList a;
+  std::string Message = a.empty() ? "empty" : "not empty";
+  std::cout << Message << '\n';
+  // std::cout << a.front() << '\n';
+  std::cout << "adding element to a" << '\n';
+  std::string myString = "harminc";
+  a.addFront(myString);
+  std::cout << a.front() << '\n';
+  std::cout << "removing the front from a" << '\n';
+  a.removeFront();
+
+  return 0;
 }

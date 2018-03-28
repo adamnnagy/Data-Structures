@@ -1,4 +1,7 @@
+#include <cstdlib>
 #include <string>
+
+
 
 class SNode {
 private:
@@ -13,9 +16,9 @@ public:
   SLinkedList(); // empty list constructor
   ~SLinkedList(); // destructor
   bool empty() const; // is list empty ?
-  const std::string& front() const; // get front element
-  void addFront (const std::string& e); // add to front of list
-  void removeFront (); // remove front item list
-private:
+  std::string& front() const; // get front element
+  void addFront(const std::string& e); // add to front of list
+  void removeFront(); // remove front item list
+protected:
   SNode* head; // pointer to the head of list
 };
